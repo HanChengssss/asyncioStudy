@@ -84,7 +84,7 @@ StopIteration
 # print(next(f))
 # print(next(f))
 
-# 模拟一个最简单的生成器
+# 模拟一个最简单的迭代器
 # class IteratorImitate():
 #     def __init__(self, n):
 #         self.init_num = n
@@ -110,28 +110,53 @@ StopIteration
 # print([num for num in imitate])
 
 # 模拟一个列表生成器
-class ListIteratorImitate():
-    def __init__(self, L):
-        self.L = L
-        self.index = 0
-        self.max_index = len(L)
+# class ListIteratorImitate():
+#     def __init__(self, L):
+#         self.L = L
+#         self.index = 0
+#         self.max_index = len(L)
+#
+#     def __iter__(self):
+#         '''必须实现这个方法才能算iterable对象，不然使用for循环会报错'''
+#         return self
+#
+#     def __next__(self):
+#         if self.index >= self.max_index:
+#             raise StopIteration
+#         value = self.L[self.index]
+#         self.index += 1
+#         return value
+#
+# LII = ListIteratorImitate([1, 2, 3, 4])
+# for num in LII:
+#     print(num)
+# print(next(LII))
+# print(next(LII))
+# print(next(LII))
+# print(next(LII))
+# print(next(LII))
 
-    def __iter__(self):
-        '''必须实现这个方法才能算iterable对象，不然使用for循环会报错'''
-        return self
+# 生成器 1
+# def foo():
+#     print("staring...")
+#     while True:
+#         res = yield 4
+#         print("res:", res)
+#
+# g = foo()
+# print(next(g))
+# print("*"*20)
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
 
-    def __next__(self):
-        if self.index >= self.max_index:
-            raise StopIteration
-        value = self.L[self.index]
-        self.index += 1
-        return value
-
-LII = ListIteratorImitate([1, 2, 3, 4])
-for num in LII:
-    print(num)
-# print(next(LII))
-# print(next(LII))
-# print(next(LII))
-# print(next(LII))
-# print(next(LII))
+# 生成器（2个yield）
+def foo_2():
+    for i in range(2):
+        yield 4
+    yield "finish"
+g = foo_2()
+print(next(g))
+print(next(g))
+print(next(g))
